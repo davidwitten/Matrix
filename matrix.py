@@ -44,11 +44,6 @@ class Matrix:
 		news = [[(-1) ** (column + row) * abs(Matrix([[news.row[k][i] for i in range(len(self.row[0])) if i != column] for k in range(len(self.row)) if k != row])) for column in range(len(self.row[0]))] for row in range(len(self.row))]
 		return Matrix.scalar( Matrix(news),1/determinant)
 
+#Example matrix:
 mat = Matrix([[1,2,0,0],[0,1,9,0],[8,0,1,0],[4,3,5,1]])
 
-a = Matrix([[1,3],[3,4]])
-b = Matrix([[1,2],[3,4]])
-print(a-b)
-print(~a)
-print(a ** 15)
-print(a * ~a)
