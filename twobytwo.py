@@ -1,6 +1,6 @@
 __author__ = 'DavidW'
-arrays = [[1,2,10], [3, 1, 44]]
-#arrays = [[1,2,3], [ 4, 6, 8]]
+arrays = [[1,4,19], [2,3,18]]
+
 
 def multList(scalar, array):
     return list(map(lambda x: x * scalar, array))
@@ -23,4 +23,5 @@ arrays = [multList(1/i[1-n], i) for n, i in enumerate(arrays)]
 arrays = [[round(j, 5) for j in i] for i in arrays]
 
 #prints it well
+print(arrays)
 printWell(arrays)
