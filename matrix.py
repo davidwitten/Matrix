@@ -1,6 +1,8 @@
 from functools import reduce
+import twobytwo
 def dot(a,b):
 	return sum([a[i] * b[i] for i in range(len(b))])
+
 class Matrix:
 	def __init__(self, rows):
 		self.row = rows
@@ -43,7 +45,30 @@ class Matrix:
 		news = Matrix.transpose(self)
 		news = [[(-1) ** (column + row) * abs(Matrix([[news.row[k][i] for i in range(len(self.row[0])) if i != column] for k in range(len(self.row)) if k != row])) for column in range(len(self.row[0]))] for row in range(len(self.row))]
 		return Matrix.scalar( Matrix(news),1/determinant)
+<<<<<<< Updated upstream
 
 #Example matrix:
 mat = Matrix([[1,2,0,0],[0,1,9,0],[8,0,1,0],[4,3,5,1]])
 
+=======
+	def ref(self): #row-eschilon form
+		if len(self.row) == 2:
+			return Matrix(twobytwo.func(self.row))
+		else:
+			array = toPos(array, 0)
+			Barray = Matrix.ref([i[1:] for i in array[1:]])
+			array = [array[0]]  + [[0] + Barray[i] for i in range(len(Barray))] #For n x n array, it solves the bottom right (n-1) x (n-1)   
+			for i in range(1,len(array)): #Can't do it inline, 
+				array[0] = addPart([array[0], twobytwo.multList(-array[0][i],array[i])]) #Solves for one, but it still won't be simplified
+			array[0] = twobytwo.multList(1/array[0][0], array[0]) #simplify
+		return Matrix(array)
+                
+mat = Matrix([[1,2,0,0],[0,1,9,0],[8,0,1,0],[4,3,5,1]])
+
+a = Matrix([[1,2],[3,4]])
+b = Matrix([[1,3],[3,4]])
+print(a-b)
+print(~a)
+print(a ** 15)
+print(a * ~a)
+>>>>>>> Stashed changes
