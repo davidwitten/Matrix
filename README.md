@@ -1,10 +1,8 @@
 # Matrix
 Revolutionary python class. It can all of the major matrix functions, including addition, subtract, multiplication, inverse, determinant.
 
-Notes
-==
-The only files needed are "twobytwo.py" and "matrix.py".
-Example
+
+Examples
 ==
     a = Matrix([[1,2],[3,4]])
     b = Matrix([[4,3],[2,1]])
