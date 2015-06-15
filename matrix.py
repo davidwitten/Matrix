@@ -33,6 +33,8 @@ class Matrix:
 		return Matrix([[-1 * i for i in j] for j in self.row])
 	def __sub__(self,other):
 		return Matrix([self + -other])
+	def __truediv__(self, other):
+		return Matrix(self * ~other)
 	def transpose(something):
 		return Matrix([[something.row[k][i] for k in range(len(something.row[0]))] for i in range(len(something.row))])
 	def scalar(self, number):
@@ -59,6 +61,10 @@ class Matrix:
 				array[0] = addPart([array[0], twobytwo.multList(-array[0][i],array[i])]) #Solves for one, but it still won't be simplified
 			array[0] = twobytwo.multList(1/array[0][0], array[0]) #simplify
 		return Matrix(array)
+	def solve(self):
+		a = Matrix.ref(self)
+		b = '(' + ','.join([str(i[-1]) for i in a.row]) + ")"
+		return b
 	def __getitem__(self, item):
 		return self.row[item]
                 
@@ -66,6 +72,9 @@ mat = Matrix([[1,2,0,0],[0,1,9,0],[8,0,1,0],[4,3,5,1]])
 
 a = Matrix([[1,2],[3,4]])
 b = Matrix([[1,3],[3,4]])
-g = [a-b,~a * abs(a), a ** 15, a * b, b * a, (b * a)[0]]
+g = [a-b,~a * abs(a), a ** 15, a * b, b * a, (b * a)[0], a / b]
 
+x = Matrix([[2,3,21],[3,5,34]])
+print(Matrix.solve(x))
+print()
 print('\n\n'.join([str(i) for i in g]))
