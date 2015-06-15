@@ -3,11 +3,14 @@ import twobytwo
 def dot(a,b):
 	return sum([a[i] * b[i] for i in range(len(b))])
 
+def addPart(array):
+    return [sum([array[k][i] for k in range(len(array))]) for i in range(len(array[0]))]
+
 class Matrix:
 	def __init__(self, rows):
 		self.row = rows
 	def __repr__(self):
-		return '\n'.join([str(i) for i in self.row]) + "\n"
+		return '\n'.join([str(i) for i in self.row])
 
 	def __abs__(self):
 		if len(self.row) > 2:
@@ -45,30 +48,24 @@ class Matrix:
 		news = Matrix.transpose(self)
 		news = [[(-1) ** (column + row) * abs(Matrix([[news.row[k][i] for i in range(len(self.row[0])) if i != column] for k in range(len(self.row)) if k != row])) for column in range(len(self.row[0]))] for row in range(len(self.row))]
 		return Matrix.scalar( Matrix(news),1/determinant)
-<<<<<<< Updated upstream
-
-#Example matrix:
-mat = Matrix([[1,2,0,0],[0,1,9,0],[8,0,1,0],[4,3,5,1]])
-
-=======
 	def ref(self): #row-eschilon form
 		if len(self.row) == 2:
 			return Matrix(twobytwo.func(self.row))
 		else:
-			array = toPos(array, 0)
-			Barray = Matrix.ref([i[1:] for i in array[1:]])
-			array = [array[0]]  + [[0] + Barray[i] for i in range(len(Barray))] #For n x n array, it solves the bottom right (n-1) x (n-1)   
+			array = twobytwo.toPos(self.row, 0)
+			Barray = Matrix.ref(Matrix([i[1:] for i in array[1:]]))
+			array = [array[0]]  + [[0] + Barray[i] for i in range(len(Barray.row))] #For n x m array, it solves the bottom right (n-1) x (m-1)
 			for i in range(1,len(array)): #Can't do it inline, 
 				array[0] = addPart([array[0], twobytwo.multList(-array[0][i],array[i])]) #Solves for one, but it still won't be simplified
 			array[0] = twobytwo.multList(1/array[0][0], array[0]) #simplify
 		return Matrix(array)
+	def __getitem__(self, item):
+		return self.row[item]
                 
 mat = Matrix([[1,2,0,0],[0,1,9,0],[8,0,1,0],[4,3,5,1]])
 
 a = Matrix([[1,2],[3,4]])
 b = Matrix([[1,3],[3,4]])
-print(a-b)
-print(~a)
-print(a ** 15)
-print(a * ~a)
->>>>>>> Stashed changes
+g = [a-b,~a * abs(a), a ** 15, a * b, b * a, (b * a)[0]]
+
+print('\n\n'.join([str(i) for i in g]))
