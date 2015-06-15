@@ -48,10 +48,9 @@ Multiplication
         [20, 13]
 Division
 --
-a / b = a * ~b
-    print(a / b)
-    >>> [1.5, -2.5]
-        [2.5, -3.5]
+        print(a / b) #a * ~b
+        >>> [1.5, -2.5]
+            [2.5, -3.5]
 Solving Systmes
 --
     g = Matrix([[1,3,7],[2,4,10]])
