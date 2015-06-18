@@ -52,6 +52,6 @@ Division
 Solving Systems
 --
     g = Matrix([[1,3,7],[2,4,10]])
-    print(Matrix.solve(g))
+    print(g.solve())
     >>> (1.0,2.0) #x = 1.0, y = 2.0
     
