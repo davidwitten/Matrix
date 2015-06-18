@@ -1,5 +1,5 @@
 # Matrix
-Revolutionary python class. It can all of the major matrix functions, including addition, subtract, multiplication, inverse, determinant.
+Revolutionary python class. It can all of the major matrix functions, including addition, subtraction, multiplication, inverse, determinant, and it can solve a system of equations.
 
 
 Examples
