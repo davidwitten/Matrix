@@ -11,7 +11,8 @@ class Matrix:
 		self.row = rows
 	def __repr__(self):
 		return '\n'.join([str(i) for i in self.row])
-
+	def __round__(self,n = 0):
+		return Matrix([[round(self.row[r][column],n) for column in range(len(self.row[0]))] for r in range(len(self.row))])
 	def __abs__(self):
 		if len(self.row) > 2:
 			a = 0
@@ -35,8 +36,8 @@ class Matrix:
 		return Matrix([self + -other])
 	def __truediv__(self, other):
 		return Matrix(self * ~other)
-	def transpose(something):
-		return Matrix([[something.row[k][i] for k in range(len(something.row[0]))] for i in range(len(something.row))])
+	def transpose(self):
+		return Matrix([[self.row[k][i] for k in range(len(self.row[0]))] for i in range(len(self.row))])
 	def scalar(self, number):
 		return Matrix([[round(number * i,4) for i in j] for j in self.row])
 	def __pow__(self, power):
@@ -57,7 +58,7 @@ class Matrix:
 			array = twobytwo.toPos(self.row, 0)
 			Barray = Matrix.ref(Matrix([i[1:] for i in array[1:]]))
 			array = [array[0]]  + [[0] + Barray[i] for i in range(len(Barray.row))] #For n x m array, it solves the bottom right (n-1) x (m-1)
-			for i in range(1,len(array)): #Can't do it inline, 
+			for i in range(1,len(array)): #Can't do it inline
 				array[0] = addPart([array[0], twobytwo.multList(-array[0][i],array[i])]) #Solves for one, but it still won't be simplified
 			array[0] = twobytwo.multList(1/array[0][0], array[0]) #simplify
 		return Matrix(array)
@@ -71,10 +72,10 @@ class Matrix:
 mat = Matrix([[1,2,0,0],[0,1,9,0],[8,0,1,0],[4,3,5,1]])
 
 a = Matrix([[1,2],[3,4]])
-b = Matrix([[1,3],[3,4]])
+b = Matrix([[4,3],[2,1]])
 g = [a-b,~a * abs(a), a ** 15, a * b, b * a, (b * a)[0], a / b]
 
-x = Matrix([[2,3,21],[3,5,34]])
-print(Matrix.solve(x))
+x = Matrix([[1,3,7],[2,4,10]])
+print(x.solve())
 print()
 print('\n\n'.join([str(i) for i in g]))
