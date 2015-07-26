@@ -1,7 +1,7 @@
 from functools import reduce
 import twobytwo
 def dot(a,b):
-	return sum([a[i] * b[i] for i in range(len(b))])
+	return sum([x*y for x,y in zip(a,b)])
 
 def addPart(array):
     return [sum([array[k][i] for k in range(len(array))]) for i in range(len(array[0]))]
